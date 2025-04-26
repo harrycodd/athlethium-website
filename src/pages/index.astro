@@ -27,9 +27,9 @@ import logo from '../assets/logo.png';
         align-items: center;
         padding: 0.8rem 3vw 1rem 3vw;
         margin: 1.2rem 1.2rem 0 1.2rem;
-        background: none;
+        background: rgba(42, 60, 82, 0.50);
         border-bottom: 1.5px solid #42536a;
-        box-shadow: 0 2px 8px 0 rgba(0,0,0,0.07);
+        box-shadow: 0 4px 18px 0 rgba(0,0,0,0.18);
         border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;
       }
       .logo {
@@ -118,7 +118,7 @@ import logo from '../assets/logo.png';
         margin-top: 2rem;
       }
       .feature {
-        background: rgba(89,115,145,0.08);
+        background: rgba(42, 60, 82, 0.30);
         border-radius: 1.2rem;
         padding: 2rem 1.5rem;
         max-width: 320px;
@@ -144,14 +144,28 @@ import logo from '../assets/logo.png';
       }
       @media (max-width: 600px) {
         header {
-          padding: 0.6rem 4vw 1rem 4vw;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.6rem 4vw 0.6rem 4vw;
           margin: 0.7rem 0.7rem 0 0.7rem;
-          background: none;
+          background: rgba(42, 60, 82, 0.72);
           border-bottom: 1.5px solid #42536a;
-          box-shadow: 0 2px 8px 0 rgba(0,0,0,0.07);
+          box-shadow: 0 4px 18px 0 rgba(0,0,0,0.18);
           border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;
         }
+        main {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 0rem 3vw;
+        }
         .logo {
+          display: flex;
+          align-items: center;
           gap: 0;
         }
         .logo span {
@@ -162,7 +176,9 @@ import logo from '../assets/logo.png';
           width: 44px;
         }
         .header-actions {
+          display: flex;
           gap: 0.5rem;
+          align-items: center;
         }
         .login-btn, .register-btn {
           padding: 0.5rem 1.1rem;
