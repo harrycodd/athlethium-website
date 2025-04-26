@@ -25,7 +25,12 @@ import logo from '../assets/logo.png';
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 2rem 3vw 1rem 3vw;
+        padding: 0.8rem 3vw 1rem 3vw;
+        margin: 1.2rem 1.2rem 0 1.2rem;
+        background: none;
+        border-bottom: 1.5px solid #42536a;
+        box-shadow: 0 2px 8px 0 rgba(0,0,0,0.07);
+        border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;
       }
       .logo {
         display: flex;
@@ -136,6 +141,33 @@ import logo from '../assets/logo.png';
         color: #b2c7de;
         font-size: 0.95rem;
         opacity: 0.7;
+      }
+      @media (max-width: 600px) {
+        header {
+          padding: 0.6rem 4vw 1rem 4vw;
+          margin: 0.7rem 0.7rem 0 0.7rem;
+          background: none;
+          border-bottom: 1.5px solid #42536a;
+          box-shadow: 0 2px 8px 0 rgba(0,0,0,0.07);
+          border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;
+        }
+        .logo {
+          gap: 0;
+        }
+        .logo span {
+          display: none;
+        }
+        .logo-img {
+          height: 44px;
+          width: 44px;
+        }
+        .header-actions {
+          gap: 0.5rem;
+        }
+        .login-btn, .register-btn {
+          padding: 0.5rem 1.1rem;
+          font-size: 1rem;
+        }
       }
     </style>
   </head>
