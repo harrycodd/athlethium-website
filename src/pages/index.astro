@@ -1,50 +1,181 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+// No frontmatter needed for now
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
 ---
 
-<!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Athlethium – Adaptive Coaching for Endurance Athletes</title>
+    <meta name="description" content="Affordable, AI-powered adaptive coaching for endurance athletes. Experience a natural coach-like experience with truly personalized, polarized training plans." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      body {
+        font-family: 'Inter', Arial, sans-serif;
+        margin: 0;
+        background: linear-gradient(135deg, #597391 0%, #42536a 60%, #2a3c52 100%);
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 3vw 1rem 3vw;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        font-size: 2.2rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: #fff;
+        line-height: 1;
+      }
+      .logo-img {
+        height: 60px;
+        width: 60px;
+        object-fit: contain;
+        display: block;
+        margin: 0;
+        padding: 0;
+        filter: brightness(0) invert(1);
+      }
+      .header-actions {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+      .register-btn {
+        background: #597391;
+        color: #fff;
+        border: none;
+        border-radius: 999px;
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-decoration: none;
+      }
+      .register-btn:hover {
+        background: #42536a;
+        color: #fff;
+      }
+      .login-btn {
+        background: #fff;
+        color: #597391;
+        border: 2px solid #597391;
+        border-radius: 999px;
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+        text-decoration: none;
+      }
+      .login-btn:hover {
+        background: #597391;
+        color: #fff;
+      }
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem 3vw;
+      }
+      h1 {
+        font-size: 2.8rem;
+        margin-bottom: 1rem;
+        color: #fff;
+      }
+      .subtitle {
+        font-size: 1.3rem;
+        color: #b2c7de;
+        margin-bottom: 2.5rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+      .feature {
+        background: rgba(89,115,145,0.08);
+        border-radius: 1.2rem;
+        padding: 2rem 1.5rem;
+        max-width: 320px;
+        min-width: 220px;
+        box-shadow: 0 2px 16px 0 rgba(0,0,0,0.12);
+        border: 1px solid rgba(89,115,145,0.12);
+      }
+      .feature h2 {
+        color: #fff;
+        font-size: 1.3rem;
+        margin-bottom: 0.7rem;
+      }
+      .feature p {
+        color: #e0eaf6;
+        font-size: 1rem;
+      }
+      footer {
+        text-align: center;
+        padding: 1.5rem 0 0.5rem 0;
+        color: #b2c7de;
+        font-size: 0.95rem;
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="logo" style="text-decoration:none;">
+        <Image src={logo.src} alt="Logo" class="logo-img" width="1024" height="1024"/>
+        <span>Athlethium</span>
+      </a>
+      <div class="header-actions">
+        <a href="https://app.athlethium.com" class="login-btn">Login</a>
+        <a href="https://app.athlethium.com/register" class="register-btn">Register</a>
+      </div>
+    </header>
+    <main>
+      <h1>Adaptive Coaching for Endurance Athletes</h1>
+      <div class="subtitle">
+        Affordable, AI-powered coaching that adapts to you. Athlethium uses a polarized training model and advanced AI to deliver a natural, coach-like experience—far beyond static plans or generic LLM advice.
+      </div>
+      <div class="features">
+        <div class="feature">
+          <h2>Truly Adaptive</h2>
+          <p>Your training plan evolves with you. Athlethium analyzes your progress and feedback, updating your workouts in real time for optimal results.</p>
+        </div>
+        <div class="feature">
+          <h2>Polarized Training</h2>
+          <p>Unlike other apps, we use a proven polarized model—balancing intensity and recovery for maximum endurance gains and injury prevention.</p>
+        </div>
+        <div class="feature">
+          <h2>AI + LLM Synergy</h2>
+          <p>Combining structured algorithms with LLMs, Athlethium delivers both reliable training and flexible, human-like coaching conversations.</p>
+        </div>
+        <div class="feature">
+          <h2>Affordable for All</h2>
+          <p>Get world-class, adaptive coaching at a fraction of the cost of traditional coaching—no compromises.</p>
+        </div>
+      </div>
+    </main>
+    <footer>
+      &copy; 2025 Athlethium. All rights reserved.
+    </footer>
+  </body>
 </html>
