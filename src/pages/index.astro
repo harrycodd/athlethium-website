@@ -142,6 +142,29 @@ import logo from '../assets/logo.png';
         font-size: 0.95rem;
         opacity: 0.7;
       }
+      .download-buttons {
+        display: flex;
+        gap: 1.2rem;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+      .download-btn {
+        display: inline-block;
+        padding: 0.85rem 2.2rem;
+        border-radius: 999px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s;
+        box-shadow: 0 2px 10px 0 rgba(0,0,0,0.10);
+        background: rgba(42, 60, 82, 0.30);
+        color: #e0eaf6;
+        border: 1px solid rgba(89,115,145,0.12);
+      }
+      .download-btn:hover {
+        background: #42536a;
+        color: #fff;
+      }
       @media (max-width: 600px) {
         header {
           display: flex;
@@ -199,6 +222,10 @@ import logo from '../assets/logo.png';
       </div>
     </header>
     <main>
+      <div class="download-buttons">
+        <a href="https://testflight.apple.com/join/TWZFZYwX" class="download-btn testflight" target="_blank">Download on TestFlight (iOS)</a>
+        <a href="https://github.com/harrycodd/androidAppRepo/releases/download/Athlethium/athlethium-beta.apk" class="download-btn apk" target="_blank">Download APK (Android)</a>
+      </div>
       <h1>Adaptive Coaching for Endurance Athletes</h1>
       <div class="subtitle">
         Affordable, AI-powered coaching that adapts to you. Athlethium uses a polarized training model and advanced LLMs to deliver a natural, coach-like experience far beyond static plans or generic LLM advice.
