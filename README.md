@@ -8,6 +8,13 @@ It has three pages:
 - **Privacy Policy** (`/privacy`)
 - **Terms & Conditions** (`/terms`)
 
+## Project history
+
+Athlethium is an enhancement of the original
+[harrycodd/athlethium-react](https://github.com/harrycodd/athlethium-react) app and
+[harrycodd/athlethium-aws](https://github.com/harrycodd/athlethium-aws) backend (both now archived). It has been
+refined using [Claude Code](https://claude.com/claude-code) to make it ready for deployment.
+
 ## Getting started
 
 Needs Node 22.
