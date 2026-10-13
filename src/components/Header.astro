@@ -1,23 +1,55 @@
 ---
-const onHome = Astro.url.pathname === '/';
-const link = (hash: string) => (onHome ? hash : `/${hash}`);
+import { homePath, languages, ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const home = homePath(lang);
+const onHome = Astro.url.pathname === home;
+const link = (hash: string) => (onHome ? hash : `${home}${hash}`);
 ---
 
 <header class="site-header" id="siteHeader">
   <div class="container bar">
-    <a href="/" class="brand" aria-label="Athlethium home">
+    <a href={home} class="brand" aria-label={t.a11y.home}>
       <span class="logo-mark" aria-hidden="true"></span>
       <span class="brand-name">Athlethium</span>
     </a>
 
-    <nav class="nav" aria-label="Main">
-      <a href={link('#features')}>Features</a>
-      <a href={link('#how-it-works')}>How it works</a>
-      <a href={link('#about')}>About</a>
+    <nav class="nav" aria-label={t.a11y.mainNav}>
+      <a href={link('#features')}>{t.nav.features}</a>
+      <a href={link('#how-it-works')}>{t.nav.how}</a>
+      <a href={link('#about')}>{t.nav.about}</a>
     </nav>
 
     <div class="actions">
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme">
+      <details class="lang-menu" id="langMenu">
+        <summary aria-label={t.a11y.language}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
+          <span>{lang.toUpperCase()}</span>
+        </summary>
+        <ul>
+          {
+            (Object.entries(languages) as [Lang, string][]).map(([code, name]) => (
+              <li>
+                <a
+                  href={homePath(code)}
+                  hreflang={code}
+                  lang={code}
+                  data-lang={code}
+                  aria-current={code === lang ? 'true' : undefined}
+                >
+                  {name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label={t.a11y.theme}>
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <circle cx="12" cy="12" r="4"></circle>
           <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
@@ -26,7 +58,7 @@ const link = (hash: string) => (onHome ? hash : `/${hash}`);
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
       </button>
-      <a href={link('#download')} class="btn btn-primary btn-small">Get the app</a>
+      <a href={link('#download')} class="btn btn-primary btn-small get-app">{t.nav.getApp}</a>
     </div>
   </div>
 </header>
@@ -46,6 +78,23 @@ const link = (hash: string) => (onHome ? hash : `/${hash}`);
       var next = isDark() ? 'light' : 'dark';
       root.dataset.theme = next;
       try { localStorage.setItem('athlethium-theme', next); } catch (e) {}
+    });
+
+    // Remember a language picked here, so the English home page doesn't redirect away from it.
+    var langMenu = document.getElementById('langMenu');
+    langMenu.addEventListener('click', function (event) {
+      var choice = event.target.closest('a[data-lang]');
+      if (!choice) return;
+      try { localStorage.setItem('athlethium-lang', choice.dataset.lang); } catch (e) {}
+    });
+    document.addEventListener('click', function (event) {
+      if (langMenu.open && !langMenu.contains(event.target)) langMenu.open = false;
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && langMenu.open) {
+        langMenu.open = false;
+        langMenu.querySelector('summary').focus();
+      }
     });
 
     function onScroll() {
@@ -119,6 +168,93 @@ const link = (hash: string) => (onHome ? hash : `/${hash}`);
     gap: 8px;
   }
 
+  .lang-menu {
+    position: relative;
+  }
+
+  .lang-menu summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .lang-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .lang-menu summary:hover,
+  .lang-menu[open] summary {
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+
+  .lang-menu summary svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .lang-menu ul {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    min-width: 168px;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--bg-raised);
+    box-shadow: var(--shadow-lg);
+    animation: menu-in 0.16s ease-out;
+  }
+
+  .lang-menu a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 12px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .lang-menu a:hover {
+    background: var(--bg-sunken);
+    color: var(--text);
+  }
+
+  .lang-menu a[aria-current] {
+    color: var(--text);
+  }
+
+  .lang-menu a[aria-current]::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+
   .theme-toggle {
     display: grid;
     place-items: center;
@@ -168,6 +304,13 @@ const link = (hash: string) => (onHome ? hash : `/${hash}`);
 
   @media (max-width: 760px) {
     .nav {
+      display: none;
+    }
+  }
+
+  /* Phones: the language and theme controls take priority over the download shortcut. */
+  @media (max-width: 420px) {
+    .get-app {
       display: none;
     }
   }

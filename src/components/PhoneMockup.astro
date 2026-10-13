@@ -1,5 +1,11 @@
 ---
 // A stylised "Today" screen from the app, drawn in HTML so it stays sharp and follows the theme.
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const t = ui[Astro.props.lang].phone;
 const intervals = [
   { zone: 2, h: 34, w: 3 },
   { zone: 3, h: 48, w: 2 },
@@ -11,15 +17,8 @@ const intervals = [
   { zone: 5, h: 88, w: 1 },
   { zone: 1, h: 24, w: 3 },
 ];
-const week = [
-  { d: 'M', state: 'done' },
-  { d: 'T', state: 'today' },
-  { d: 'W', state: 'rest' },
-  { d: 'T', state: 'planned' },
-  { d: 'F', state: 'planned' },
-  { d: 'S', state: 'planned' },
-  { d: 'S', state: 'planned' },
-];
+const states = ['done', 'today', 'rest', 'planned', 'planned', 'planned', 'planned'];
+const week = t.days.map((d, i) => ({ d, state: states[i] }));
 ---
 
 <div class="phone" aria-hidden="true">
@@ -35,8 +34,8 @@ const week = [
     <div class="app">
       <div class="app-head">
         <div>
-          <p class="date">Tuesday</p>
-          <p class="title">Today</p>
+          <p class="date">{t.weekday}</p>
+          <p class="title">{t.today}</p>
         </div>
         <div class="readiness">
           <svg viewBox="0 0 36 36">
@@ -60,11 +59,11 @@ const week = [
 
       <div class="session">
         <div class="session-top">
-          <span class="chip">Ride</span>
-          <span class="time">1h 15m</span>
+          <span class="chip">{t.sport}</span>
+          <span class="time">{t.duration}</span>
         </div>
-        <p class="session-title">Threshold intervals</p>
-        <p class="session-sub">3 × 12 min at threshold, easy spin between</p>
+        <p class="session-title">{t.sessionTitle}</p>
+        <p class="session-sub">{t.sessionBody}</p>
         <div class="chart">
           {
             intervals.map((b) => (
@@ -74,24 +73,24 @@ const week = [
         </div>
         <div class="start">
           <span class="play"></span>
-          Start session
+          {t.start}
         </div>
       </div>
 
-      <p class="next-label">Up next</p>
+      <p class="next-label">{t.upNext}</p>
       <div class="next">
         <div class="row">
           <span class="sport run"></span>
           <div>
-            <p>Easy run</p>
-            <small>Thursday · 45 min</small>
+            <p>{t.run}</p>
+            <small>{t.runWhen}</small>
           </div>
         </div>
         <div class="row">
           <span class="sport strength"></span>
           <div>
-            <p>Strength · lower body</p>
-            <small>Friday · 40 min</small>
+            <p>{t.strength}</p>
+            <small>{t.strengthWhen}</small>
           </div>
         </div>
       </div>

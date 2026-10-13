@@ -4,7 +4,7 @@ The marketing site for Athlethium, the adaptive coaching app for cyclists, runne
 
 It has three pages:
 
-- **Home** (`/`): what the app does, how it works, and links to the iOS (TestFlight) and Android downloads
+- **Home**: what the app does, how it works, and links to the iOS (TestFlight) and Android downloads. It comes in the app's six languages: `/` (English), `/es/`, `/fr/`, `/de/`, `/it/` and `/ja/`
 - **Privacy Policy** (`/privacy`)
 - **Terms & Conditions** (`/terms`)
 
@@ -37,8 +37,12 @@ src/
     Footer.astro
     PhoneMockup.astro   # The app's "Today" screen drawn in HTML for the hero
     StoreButtons.astro  # iOS and Android download links
+    Home.astro          # The home page, rendered once per language
+  i18n/
+    ui.ts               # All site copy, one dictionary per language
   pages/
-    index.astro         # Home page
+    index.astro         # English home page
+    [lang]/index.astro  # /es/, /fr/, /de/, /it/, /ja/
     privacy.astro
     terms.astro
   styles/
@@ -49,9 +53,17 @@ public/                 # Logo, favicon and other static files, served as-is
 ## Editing the site
 
 - **Colours and fonts** are design tokens at the top of `src/styles/global.css`. They match the app: zinc greys with a green accent. Each theme sets its own values: light by default, and dark when the system asks for it or the visitor picks it.
+- **Copy** lives in `src/i18n/ui.ts`. English is the source, and the other languages are typed against it, so a missing string fails `npm run check`. Change a sentence in every language, not just English.
 - **Download links** live in `src/components/StoreButtons.astro`, which is used in both the hero and the download banner.
-- **Legal pages** contain only their text. The layout comes from `src/layouts/Legal.astro`. Update the effective date passed to `<Legal>` when the wording changes.
+- **Legal pages** are English only. The footer marks them as English on the translated pages. They contain only their text. The layout comes from `src/layouts/Legal.astro`. Update the effective date passed to `<Legal>` when the wording changes.
 - **Theme choice** is saved in the browser under the `localStorage` key `athlethium-theme`. Without a saved choice, the site follows the system setting.
+
+## Languages
+
+- **First visit:** visitors to `/` are sent to their browser's language, the first of their preferred languages that the site supports. English stays on `/`.
+- **Remembered choice:** picking a language in the header saves it under the `localStorage` key `athlethium-lang`, and that choice wins on later visits.
+- **Direct links:** a link straight to `/fr/` or another language page always opens in that language, whatever the browser's setting.
+- **Matching the app:** the languages and the formal or informal "you" for each match the app, which tells you formally in French and informally in Spanish, German and Italian.
 
 ## Deployment
 
