@@ -1,218 +1,174 @@
 ---
+const onHome = Astro.url.pathname === '/';
+const link = (hash: string) => (onHome ? hash : `/${hash}`);
 ---
-<svg width="0" height="0" style="position:absolute;">
-  <defs>
-    <linearGradient id="themeIconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="var(--primary)" />
-      <stop offset="100%" stop-color="var(--accent)" />
-    </linearGradient>
-  </defs>
-</svg>
 
-<header class="header">
-  <div class="header-content">
-    <a href="/" class="logo-container">
-      <div class="logo" aria-label="Athlethium Logo"></div>
-      <span class="site-title">Athlethium</span>
+<header class="site-header" id="siteHeader">
+  <div class="container bar">
+    <a href="/" class="brand" aria-label="Athlethium home">
+      <span class="logo-mark" aria-hidden="true"></span>
+      <span class="brand-name">Athlethium</span>
     </a>
-    <button class="light-toggle" id="lightToggle" title="Toggle light/dark mode">
-      <svg
-        id="themeIcon"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="url(#themeIconGradient)"
-        stroke="none"
-      >
-        <circle cx="12" cy="12" r="5" />
-        <g stroke="url(#themeIconGradient)" stroke-width="2">
-          <line x1="12" y1="1" x2="12" y2="4" />
-          <line x1="12" y1="20" x2="12" y2="23" />
-          <line x1="1" y1="12" x2="4" y2="12" />
-          <line x1="20" y1="12" x2="23" y2="12" />
-          <line x1="4.22" y1="4.22" x2="6.34" y2="6.34" />
-          <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" />
-          <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" />
-          <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" />
-        </g>
-      </svg>
-    </button>
+
+    <nav class="nav" aria-label="Main">
+      <a href={link('#features')}>Features</a>
+      <a href={link('#how-it-works')}>How it works</a>
+      <a href={link('#about')}>About</a>
+    </nav>
+
+    <div class="actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <a href={link('#download')} class="btn btn-primary btn-small">Get the app</a>
+    </div>
   </div>
 </header>
 
 <script is:inline>
-  const toggleBtn = document.getElementById('lightToggle');
-  const themeIcon = document.getElementById('themeIcon');
-  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-  const saved = localStorage.getItem('athlethium-theme');
-  function updateTheme(isLight) {
-    if (isLight) {
-      document.body.classList.add('light');
-      themeIcon.innerHTML = `
-        <path
-          stroke="url(#themeIconGradient)"
-          fill="url(#themeIconGradient)"
-          d="M21 12.79A9 9 0 1 1 11.21 3 A7 7 0 0 0 21 12.79z"
-        />
-      `;
-    } else {
-      document.body.classList.remove('light');
-      themeIcon.innerHTML = `
-        <circle
-          cx="12"
-          cy="12"
-          r="4"
-          stroke="url(#themeIconGradient)"
-          fill="url(#themeIconGradient)"
-        />
-        <path
-          stroke="url(#themeIconGradient)"
-          d="M12 2v2 M12 20v2 M2 12h2 M20 12h2 M5.64 5.64l1.4 1.4 M16.96 16.96l1.4 1.4 M5.64 18.36l1.4-1.4 M16.96 7.04l1.4-1.4"
-          stroke-width="2"
-        />
-      `;
+  (function () {
+    var root = document.documentElement;
+    var header = document.getElementById('siteHeader');
+    var toggle = document.getElementById('themeToggle');
+    var media = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function isDark() {
+      return root.dataset.theme ? root.dataset.theme === 'dark' : media.matches;
     }
-  }
-  updateTheme((saved === 'light') || (!saved && prefersLight));
-  toggleBtn.addEventListener('click', () => {
-    const isLight = document.body.classList.toggle('light');
-    localStorage.setItem('athlethium-theme', isLight ? 'light' : 'dark');
-    updateTheme(isLight);
-  });
+
+    toggle.addEventListener('click', function () {
+      var next = isDark() ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try { localStorage.setItem('athlethium-theme', next); } catch (e) {}
+    });
+
+    function onScroll() {
+      header.classList.toggle('scrolled', window.scrollY > 8);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
 </script>
 
 <style>
-  .header {
-    background: rgba(14,18,28,0.85);
-    border-radius: 20px;
-    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.15);
-    margin: 20px 24px 0;
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    top: 0; left: 0; right: 0;
+  .site-header {
+    position: sticky;
+    top: 0;
     z-index: 100;
-    height: 70px;
-    backdrop-filter: blur(10px) saturate(1.2);
-    border: 1px solid rgba(37,99,255,0.08);
-    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
   }
-  .header-content {
+
+  .site-header.scrolled {
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    border-bottom-color: var(--border);
+    backdrop-filter: saturate(1.6) blur(16px);
+    -webkit-backdrop-filter: saturate(1.6) blur(16px);
+  }
+
+  .bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 100%;
+    height: 68px;
+    gap: 24px;
   }
-  .logo-container {
+
+  .brand {
     display: flex;
     align-items: center;
+    gap: 10px;
     text-decoration: none;
   }
-  .logo {
-    /* mask-based sizing to match home */
-    width: 48px;
-    height: 48px;
-    margin-right: 16px;
-    background: var(--gradient-primary);
-    -webkit-mask: url('/logo.png') no-repeat center / contain;
-    mask: url('/logo.png') no-repeat center / contain;
-    transition: transform 0.3s;
-  }
-  .site-title {
-    font-size: 2rem;
-    font-weight: 800;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    user-select: none;
+
+  .brand-name {
+    font-size: 18px;
+    font-weight: 650;
     letter-spacing: -0.03em;
   }
-  .light-toggle {
-    background: transparent;
-    border: none;
-    padding: 8px;
-    border-radius: 50%;
+
+  .nav {
+    display: flex;
+    gap: 4px;
+  }
+
+  .nav a {
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .nav a:hover {
+    color: var(--text);
+    background: var(--bg-sunken);
+  }
+
+  .actions {
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-    outline: none;
-    position: relative;
+    gap: 8px;
   }
-  .light-toggle::before {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 32px; height: 32px;
+
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
     border-radius: 50%;
-    background: var(--gradient-primary);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  .light-toggle:hover::before { opacity: 0.15; }
-  .light-toggle:hover { transform: translateY(-2px) rotate(10deg); }
-  .light-toggle svg {
-    width:22px;
-    height:22px;
-    fill:url(#themeIconGradient);
-    stroke:url(#themeIconGradient);
-    z-index:1;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
   }
 
-  /* Add light mode styles for header */
-  body.light .header {
-    background: rgba(247, 250, 255, 0.85);
-    border: 1px solid rgba(37,99,255,0.08);
-  }
-  
-  body.light .logo {
-    background: var(--gradient-primary);
-  }
-  
-  body.light .site-title {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  body.light .light-toggle {
-    color: var(--text-light);
-  }
-  
-  body.light .light-toggle svg {
-    fill: url(#themeIconGradient);
-    stroke: url(#themeIconGradient);
+  .theme-toggle:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
   }
 
-  @media (max-width:900px) {
-    .header { margin:16px; height:60px; border-radius:16px; padding:0 16px; }
-    .header-content { max-width:100%; }
-    .logo { width:42px; height:42px; }
-    .site-title { font-size:1.5rem; }
+  .theme-toggle svg {
+    width: 16px;
+    height: 16px;
   }
-  @media (max-width:600px) {
-    .header-content { position:relative; justify-content:center; }
-    .logo-container { position:absolute; left:0; }
-    .logo-container .site-title { display:none; }
-    .header-content::after {
-      content:"Athlethium";
-      position:absolute;
-      font-size:1.3rem;
-      font-weight:800;
-      background:var(--gradient-primary);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
-      letter-spacing:-0.03em;
+
+  /* Show the moon in light mode and the sun in dark mode. */
+  .icon-sun {
+    display: none;
+  }
+
+  :global(:root[data-theme='dark']) .icon-sun {
+    display: block;
+  }
+
+  :global(:root[data-theme='dark']) .icon-moon {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .icon-sun {
+      display: block;
     }
-    .light-toggle { position:absolute; right:0; }
+
+    :global(:root:not([data-theme='light'])) .icon-moon {
+      display: none;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .nav {
+      display: none;
+    }
   }
 </style>
