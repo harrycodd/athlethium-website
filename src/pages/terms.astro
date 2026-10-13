@@ -1,410 +1,85 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/logo.png';
-import Header from '../components/Header.astro';
+import Legal from '../layouts/Legal.astro';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Terms and Conditions - Athlethium</title>
-    <meta name="description" content="Terms and Conditions for Athlethium - Understand your rights and responsibilities when using our services." />
-    <link rel="icon" type="image/png" href="/website-icon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --primary: #2563ff;
-        --primary-dark: #1a47b8;
-        --accent: #6c63ff;
-        --accent-secondary: #4F46E5;
-        --background-dark: #0a0c12;
-        --background-light: #f7faff;
-        --card-dark: #141824;
-        --card-light: #ffffff;
-        --text-dark: #fff;
-        --text-light: #0f172a;
-        --text-muted-dark: rgba(255, 255, 255, 0.7);
-        --text-muted-light: rgba(15, 23, 42, 0.7);
-        --border-radius: 18px;
-        --shadow: 0 8px 32px -4px rgba(0,0,0,0.15);
-        --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-      }
+<Legal
+  title="Terms and Conditions - Athlethium"
+  description="Terms and Conditions for Athlethium - Understand your rights and responsibilities when using our services."
+  heading="Terms and Conditions"
+  effective="Effective Date: 12/5/25"
+>
+  <p>Welcome to Athlethium! These Terms and Conditions govern your use of our services as an endurance coach for cycling, running, swimming, or any combination of these activities. By accessing or using our services, you agree to comply with and be bound by these Terms and Conditions. If you do not agree, please do not use our services.</p>
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+  <h2>1. Acceptance of Terms</h2>
+  <p>By using Athlethium, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. These Terms and Conditions constitute a legally binding agreement between you and Athlethium. If you do not agree to these Terms and Conditions, please refrain from using our services.</p>
 
-      body {
-        background: linear-gradient(145deg, var(--background-dark) 0%, #131726 100%);
-        color: var(--text-dark);
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        font-weight: 400;
-        min-height: 100vh;
-        margin: 0;
-        padding: 0;
-        transition: background 0.3s, color 0.3s;
-        position: relative;
-        overflow-x: hidden;
-        line-height: 1.6;
-        letter-spacing: -0.01em;
-      }
-      
-      body::before {
-        content: '';
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: 
-          radial-gradient(circle at 15% 25%, rgba(37,99,255,0.07) 0%, transparent 25%),
-          radial-gradient(circle at 85% 75%, rgba(108,99,255,0.05) 0%, transparent 30%),
-          url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="1" fill="%232563ff" fill-opacity="0.07"/></svg>');
-        opacity: 1;
-        z-index: 0;
-        pointer-events: none;
-      }
+  <h2>2. Services Provided</h2>
+  <p>Athlethium provides coaching services for endurance sports, including cycling, running, and swimming. Our services may include:</p>
+  <ul>
+    <li>Personalized training plans tailored to your fitness level and goals</li>
+    <li>Performance tracking and analysis</li>
+    <li>Communication regarding your training progress</li>
+    <li>Adaptation of training plans based on your feedback and progress</li>
+  </ul>
+  <p>We reserve the right to modify or discontinue any part of our services at any time without prior notice.</p>
 
-      .main-content {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 120px 24px 60px;
-        position: relative;
-        z-index: 1;
-      }
+  <h2>3. User Responsibilities</h2>
+  <p>You agree to:</p>
+  <ul>
+    <li>Provide accurate and complete information when creating your account</li>
+    <li>Keep your account information secure and confidential</li>
+    <li>Notify us immediately of any unauthorized use of your account or any other breach of security</li>
+    <li>Use our services only for lawful purposes and in accordance with these Terms and Conditions</li>
+    <li>Consult with a healthcare professional before beginning any exercise program</li>
+    <li>Take responsibility for your own physical safety during training</li>
+  </ul>
 
-      .policy-container {
-        background: rgba(20, 24, 36, 0.7);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 40px;
-        color: var(--text-dark);
-        border: 1px solid rgba(37,99,255,0.08);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-      }
+  <h2>4. Payment Terms</h2>
+  <p>Payments for our services are processed through third-party payment providers (such as Apple, Google, and Stripe). By using our services, you agree to:</p>
+  <ul>
+    <li>Comply with the terms and conditions of these payment providers</li>
+    <li>Pay all fees and charges associated with your account on a timely basis</li>
+    <li>Provide current, complete, and accurate billing information</li>
+  </ul>
+  <p>All subscription fees are non-refundable except where required by applicable law. We reserve the right to change our pricing at any time, with notice provided to current subscribers at least 30 days in advance.</p>
 
-      .policy-header {
-        margin-bottom: 40px;
-        text-align: center;
-      }
+  <h2>5. Privacy Policy</h2>
+  <p>Your use of Athlethium is also governed by our <a href="/privacy">Privacy Policy</a>, which is incorporated into these Terms and Conditions by reference. Our Privacy Policy outlines how we collect, use, disclose, and protect your personal information when you use our services. By using Athlethium, you consent to the collection and use of information as described in our Privacy Policy.</p>
 
-      .policy-title {
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin-bottom: 10px;
-        letter-spacing: -0.02em;
-        background: var(--gradient-primary);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
+  <h2>6. Intellectual Property</h2>
+  <p>All content, features, and functionality on the Athlethium platform, including but not limited to text, graphics, logos, button icons, images, audio clips, data compilations, and software, are the exclusive property of Athlethium and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.</p>
+  <p>You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on our platform without our express prior written permission.</p>
 
-      .policy-date {
-        color: var(--text-muted-dark);
-        font-size: 1.1rem;
-        font-weight: 500;
-      }
+  <h2>7. Limitation of Liability</h2>
+  <p>To the fullest extent permitted by applicable law, Athlethium and its affiliates, directors, officers, employees, agents, partners, and licensors shall not be liable for:</p>
+  <ul>
+    <li>Any indirect, incidental, special, consequential, or punitive damages arising from your use of our services</li>
+    <li>Any loss of profits, revenue, data, or business opportunities</li>
+    <li>Any personal injury, including death, resulting from your use of our training plans or advice</li>
+    <li>Any damages resulting from interruption of service or errors in our platform</li>
+  </ul>
+  <p>In no event shall our total liability exceed the amount paid by you, if any, for accessing our services during the twelve months preceding the claim.</p>
 
-      .policy-content h2 {
-        font-size: 1.5rem;
-        margin: 30px 0 15px;
-        font-weight: 700;
-        letter-spacing: -0.01em;
-      }
+  <h2>8. Indemnification</h2>
+  <p>You agree to indemnify, defend, and hold harmless Athlethium, its affiliates, and their respective officers, directors, employees, and agents from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to:</p>
+  <ul>
+    <li>Your violation of these Terms and Conditions</li>
+    <li>Your use of our services</li>
+    <li>Your violation of the rights of a third party</li>
+    <li>Your negligence or misconduct</li>
+  </ul>
 
-      .policy-content p {
-        margin-bottom: 15px;
-        line-height: 1.6;
-      }
+  <h2>9. Changes to Terms</h2>
+  <p>We reserve the right to modify these Terms and Conditions at any time at our sole discretion. When we make changes, we will post the updated terms on our platform and update the "Effective Date" at the top of these Terms and Conditions. Your continued use of our services after any such changes constitutes your acceptance of the new Terms and Conditions.</p>
+  <p>For any material changes to the Terms and Conditions, we will make reasonable efforts to notify you at least 14 days in advance of the effective date of the changes.</p>
 
-      .policy-content ul {
-        margin: 15px 0;
-        padding-left: 20px;
-      }
+  <h2>10. Governing Law</h2>
+  <p>These Terms and Conditions shall be governed by and construed in accordance with the laws of England and Wales, without regard to its conflict of law provisions. Any legal action or proceeding relating to your access to or use of our services shall be instituted exclusively in the courts of England and Wales.</p>
 
-      .policy-content li {
-        margin-bottom: 8px;
-      }
+  <h2>11. Termination</h2>
+  <p>We may terminate or suspend your account and access to our services immediately, without prior notice or liability, for any reason, including, without limitation, breach of these Terms and Conditions. Upon termination, your right to use our services will cease immediately.</p>
 
-      .policy-content a {
-        color: var(--primary);
-        text-decoration: none;
-        font-weight: 500;
-        transition: all 0.2s;
-      }
-
-      .policy-content a:hover {
-        text-decoration: underline;
-      }
-
-      .back-btn {
-        display: inline-flex;
-        align-items: center;
-        margin-top: 30px;
-        color: var(--text-dark);
-        text-decoration: none;
-        font-weight: 600;
-        transition: all 0.2s;
-      }
-
-      .back-btn:hover {
-        color: var(--primary);
-      }
-
-      .back-btn svg {
-        margin-right: 8px;
-        width: 20px;
-        height: 20px;
-      }
-
-      footer {
-        padding: 36px 24px;
-        font-size: 0.95rem;
-        text-align: center;
-        background: rgba(14, 18, 28, 0.8);
-        color: var(--text-muted-dark);
-        backdrop-filter: blur(10px);
-        margin-top: 80px;
-        border-top: 1px solid rgba(37,99,255,0.08);
-      }
-      
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-      
-      .footer-links {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 10px;
-      }
-      
-      .footer-link {
-        color: var(--text-muted-dark);
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      
-      .footer-link:hover {
-        color: var(--primary);
-      }
-
-      .social-links {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 20px;
-      }
-      
-      .social-link {
-        color: var(--text-muted-dark);
-        font-size: 1.5rem;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-      }
-      
-      .social-link svg {
-        width: 24px;
-        height: 24px;
-        fill: currentColor;
-      }
-
-      /* Light mode support */
-      body.light {
-        background: linear-gradient(145deg, #f0f5ff 0%, var(--background-light) 100%);
-        color: var(--text-light);
-      }
-      
-      body.light::before {
-        background: 
-          radial-gradient(circle at 15% 25%, rgba(37,99,255,0.05) 0%, transparent 25%),
-          radial-gradient(circle at 85% 75%, rgba(108,99,255,0.03) 0%, transparent 30%),
-          url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="1" fill="%232563ff" fill-opacity="0.05"/></svg>');
-      }
-
-      body.light .policy-container {
-        background: rgba(255, 255, 255, 0.8);
-        color: var(--text-light);
-      }
-
-      body.light .policy-content {
-        color: var(--text-light);
-      }
-
-      body.light .policy-date {
-        color: var(--text-muted-light);
-      }
-
-      body.light .back-btn {
-        color: var(--text-light);
-      }
-
-      body.light footer {
-        background: rgba(247, 250, 255, 0.8);
-        color: var(--text-muted-light);
-      }
-      
-      body.light .footer-link {
-        color: var(--text-muted-light);
-      }
-
-      body.light .social-link {
-        color: var(--text-muted-light);
-      }
-
-      /* Update media query to match index page */
-      @media (max-width: 900px) {
-        .main-content {
-          margin-top: 100px;
-          padding: 0 16px;
-        }
-      }
-
-      /* Remove redundant header properties from 768px media query */
-      @media (max-width: 768px) {
-        .policy-container {
-          padding: 30px 20px;
-        }
-        
-        .policy-title {
-          font-size: 1.8rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <Header />
-    
-    <main class="main-content">
-      <div class="policy-container">
-        <div class="policy-header">
-          <h1 class="policy-title">Terms and Conditions</h1>
-          <div class="policy-date">Effective Date: 12/5/25</div>
-        </div>
-        
-        <div class="policy-content">
-          <p>Welcome to Athlethium! These Terms and Conditions govern your use of our services as an endurance coach for cycling, running, swimming, or any combination of these activities. By accessing or using our services, you agree to comply with and be bound by these Terms and Conditions. If you do not agree, please do not use our services.</p>
-          
-          <h2>1. Acceptance of Terms</h2>
-          <p>By using Athlethium, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. These Terms and Conditions constitute a legally binding agreement between you and Athlethium. If you do not agree to these Terms and Conditions, please refrain from using our services.</p>
-          
-          <h2>2. Services Provided</h2>
-          <p>Athlethium provides coaching services for endurance sports, including cycling, running, and swimming. Our services may include:</p>
-          <ul>
-            <li>Personalized training plans tailored to your fitness level and goals</li>
-            <li>Performance tracking and analysis</li>
-            <li>Communication regarding your training progress</li>
-            <li>Adaptation of training plans based on your feedback and progress</li>
-          </ul>
-          <p>We reserve the right to modify or discontinue any part of our services at any time without prior notice.</p>
-          
-          <h2>3. User Responsibilities</h2>
-          <p>You agree to:</p>
-          <ul>
-            <li>Provide accurate and complete information when creating your account</li>
-            <li>Keep your account information secure and confidential</li>
-            <li>Notify us immediately of any unauthorized use of your account or any other breach of security</li>
-            <li>Use our services only for lawful purposes and in accordance with these Terms and Conditions</li>
-            <li>Consult with a healthcare professional before beginning any exercise program</li>
-            <li>Take responsibility for your own physical safety during training</li>
-          </ul>
-          
-          <h2>4. Payment Terms</h2>
-          <p>Payments for our services are processed through third-party payment providers (such as Apple, Google, and Stripe). By using our services, you agree to:</p>
-          <ul>
-            <li>Comply with the terms and conditions of these payment providers</li>
-            <li>Pay all fees and charges associated with your account on a timely basis</li>
-            <li>Provide current, complete, and accurate billing information</li>
-          </ul>
-          <p>All subscription fees are non-refundable except where required by applicable law. We reserve the right to change our pricing at any time, with notice provided to current subscribers at least 30 days in advance.</p>
-          
-          <h2>5. Privacy Policy</h2>
-          <p>Your use of Athlethium is also governed by our <a href="/privacy">Privacy Policy</a>, which is incorporated into these Terms and Conditions by reference. Our Privacy Policy outlines how we collect, use, disclose, and protect your personal information when you use our services. By using Athlethium, you consent to the collection and use of information as described in our Privacy Policy.</p>
-          
-          <h2>6. Intellectual Property</h2>
-          <p>All content, features, and functionality on the Athlethium platform, including but not limited to text, graphics, logos, button icons, images, audio clips, data compilations, and software, are the exclusive property of Athlethium and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.</p>
-          <p>You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on our platform without our express prior written permission.</p>
-          
-          <h2>7. Limitation of Liability</h2>
-          <p>To the fullest extent permitted by applicable law, Athlethium and its affiliates, directors, officers, employees, agents, partners, and licensors shall not be liable for:</p>
-          <ul>
-            <li>Any indirect, incidental, special, consequential, or punitive damages arising from your use of our services</li>
-            <li>Any loss of profits, revenue, data, or business opportunities</li>
-            <li>Any personal injury, including death, resulting from your use of our training plans or advice</li>
-            <li>Any damages resulting from interruption of service or errors in our platform</li>
-          </ul>
-          <p>In no event shall our total liability exceed the amount paid by you, if any, for accessing our services during the twelve months preceding the claim.</p>
-          
-          <h2>8. Indemnification</h2>
-          <p>You agree to indemnify, defend, and hold harmless Athlethium, its affiliates, and their respective officers, directors, employees, and agents from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to:</p>
-          <ul>
-            <li>Your violation of these Terms and Conditions</li>
-            <li>Your use of our services</li>
-            <li>Your violation of the rights of a third party</li>
-            <li>Your negligence or misconduct</li>
-          </ul>
-          
-          <h2>9. Changes to Terms</h2>
-          <p>We reserve the right to modify these Terms and Conditions at any time at our sole discretion. When we make changes, we will post the updated terms on our platform and update the "Effective Date" at the top of these Terms and Conditions. Your continued use of our services after any such changes constitutes your acceptance of the new Terms and Conditions.</p>
-          <p>For any material changes to the Terms and Conditions, we will make reasonable efforts to notify you at least 14 days in advance of the effective date of the changes.</p>
-          
-          <h2>10. Governing Law</h2>
-          <p>These Terms and Conditions shall be governed by and construed in accordance with the laws of England and Wales, without regard to its conflict of law provisions. Any legal action or proceeding relating to your access to or use of our services shall be instituted exclusively in the courts of England and Wales.</p>
-          
-          <h2>11. Termination</h2>
-          <p>We may terminate or suspend your account and access to our services immediately, without prior notice or liability, for any reason, including, without limitation, breach of these Terms and Conditions. Upon termination, your right to use our services will cease immediately.</p>
-          
-          <h2>12. Contact Us</h2>
-          <p>If you have any questions or concerns about these Terms and Conditions, please contact us at:</p>
-          <p>Email: <a href="mailto:support@athlethium.com">support@athlethium.com</a></p>
-        </div>
-        
-        <a href="/" class="back-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-          </svg>
-          Back to Home
-        </a>
-      </div>
-    </main>
-    
-    <footer>
-      <div class="footer-content">
-        <div class="social-links">
-          <a href="https://x.com/athlethium" class="social-link" aria-label="X (formerly Twitter)" target="_blank">
-            <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-          </a>
-          <a href="https://instagram.com/athlethium" class="social-link" aria-label="Instagram" target="_blank">
-            <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor">
-              <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772c-.5.509-1.105.902-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.247-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428.247-.67.642-1.276 1.153-1.772a4.91 4.91 0 011.772-1.153c.637-.247 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 1.802c-2.67 0-2.986.01-4.04.059-.976.045-1.505.207-1.858.344-.466.182-.8.398-1.15.748-.35.35-.566.684-.748 1.15-.137.353-.3.882-.344 1.857-.048 1.055-.059 1.37-.059 4.04 0 2.67.01 2.986.059 4.04.045.976.207 1.505.344 1.858.182.466.399.8.748 1.15.35.35.684.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.059 4.04.059 2.67 0 2.987-.01 4.04-.059.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.684.748-1.15.137-.353.3-.882.344-1.857.048-1.055.059-1.37.059-4.04 0-2.67-.01-2.986-.059-4.04-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.054-.048-1.37-.059-4.04-.059zm0 3.063a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 8.468a3.333 3.333 0 100-6.666 3.333 3.333 0 000 6.666zm6.538-8.671a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z"/>
-            </svg>
-          </a>
-          <a href="mailto:support@athlethium.com" class="social-link" aria-label="Email">
-            <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25a.85.85 0 1 1 .9-1.44L12 11l6.7-4.19a.85.85 0 1 1 .9 1.44z"/>
-            </svg>
-          </a>
-        </div>
-        
-        <div class="footer-links">
-          <a href="/" class="footer-link">Home</a>
-          <a href="/privacy" class="footer-link">Privacy Policy</a>
-          <a href="/terms" class="footer-link">Terms and Conditions</a>
-        </div>
-        
-        <p>&copy; 2025 Athlethium. All rights reserved.</p>
-      </div>
-    </footer>
-  </body>
-</html>
+  <h2>12. Contact Us</h2>
+  <p>If you have any questions or concerns about these Terms and Conditions, please contact us at:</p>
+  <p>Email: <a href="mailto:support@athlethium.com">support@athlethium.com</a></p>
+</Legal>
