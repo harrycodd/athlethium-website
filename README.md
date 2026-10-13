@@ -5,6 +5,7 @@ The marketing site for Athlethium, the adaptive coaching app for cyclists, runne
 It has three pages:
 
 - **Home**: what the app does, how it works, and links to the iOS (TestFlight) and Android downloads. It comes in the app's six languages: `/` (English), `/es/`, `/fr/`, `/de/`, `/it/` and `/ja/`
+- **Support** (`/support`, plus `/es/support` and so on): contact details and answers to common questions; this is the App Store support URL. The copy lives in `src/i18n/support.ts`
 - **Privacy Policy** (`/privacy`)
 - **Terms & Conditions** (`/terms`)
 

@@ -1,5 +1,6 @@
 ---
 import { homePath, ui, type Lang } from '../i18n/ui';
+import { support, supportPath } from '../i18n/support';
 
 interface Props {
   lang: Lang;
@@ -36,6 +37,7 @@ const year = new Date().getFullYear();
         </div>
         <div>
           <h3>{t.footer.contact}</h3>
+          <a href={supportPath(lang)}>{support[lang].nav}</a>
           <a href="mailto:support@athlethium.com">support@athlethium.com</a>
         </div>
       </nav>
