@@ -1,62 +1,73 @@
-# Astro Starter Kit: Blog
+# Athlethium website
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/athlethium-website)
+The marketing site for Athlethium, the adaptive coaching app for cyclists, runners and triathletes. It's a static [Astro](https://astro.build) site served from Cloudflare Workers.
 
-![Astro Template Preview](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+It has three pages:
 
-<!-- dash-content-start -->
+- **Home** (`/`): what the app does, how it works, and links to the iOS (TestFlight) and Android downloads
+- **Privacy Policy** (`/privacy`)
+- **Terms & Conditions** (`/terms`)
 
-Create a blog with Astro and deploy it on Cloudflare Workers as a [static website](https://developers.cloudflare.com/workers/static-assets/).
+## Getting started
 
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-<!-- dash-content-end -->
-
-## Getting Started
-
-Outside of this repo, you can start a new project with this template using [C3](https://developers.cloudflare.com/pages/get-started/c3/) (the `create-cloudflare` CLI):
+Needs Node 22.
 
 ```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/athlethium-website
+npm install
+npm run dev        # http://localhost:4321
 ```
 
-A live public deployment of this template is available at [https://athlethium-website.templates.workers.dev](https://athlethium-website.templates.workers.dev)
+| Command           | What it does                                                 |
+| :---------------- | :----------------------------------------------------------- |
+| `npm run dev`     | Local dev server with hot reload                             |
+| `npm run build`   | Builds the site into `dist/`                                 |
+| `npm run preview` | Builds, then serves it with Wrangler as Cloudflare would     |
+| `npm run check`   | Build, typecheck and a `wrangler deploy --dry-run`           |
+| `npm run deploy`  | Builds and deploys from your machine (normally CI does this) |
 
-## 🚀 Project Structure
+## Project structure
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+```text
+src/
+  layouts/
+    Base.astro          # <head>, theme setup, header, footer, scroll reveals
+    Legal.astro         # Page layout for the privacy policy and terms
+  components/
+    Header.astro        # Sticky nav and the light/dark toggle
+    Footer.astro
+    PhoneMockup.astro   # The app's "Today" screen drawn in HTML for the hero
+    StoreButtons.astro  # iOS and Android download links
+  pages/
+    index.astro         # Home page
+    privacy.astro
+    terms.astro
+  styles/
+    global.css          # Design tokens (colours, type, radii), buttons, base styles
+public/                 # Logo, favicon and other static files, served as-is
+```
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Editing the site
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+- **Colours and fonts** are design tokens at the top of `src/styles/global.css`. They match the app: zinc greys with a green accent. Each theme sets its own values: light by default, and dark when the system asks for it or the visitor picks it.
+- **Download links** live in `src/components/StoreButtons.astro`, which is used in both the hero and the download banner.
+- **Legal pages** contain only their text. The layout comes from `src/layouts/Legal.astro`. Update the effective date passed to `<Legal>` when the wording changes.
+- **Theme choice** is saved in the browser under the `localStorage` key `athlethium-theme`. Without a saved choice, the site follows the system setting.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Deployment
 
-## 🧞 Commands
+`.github/workflows/deploy.yml` runs on GitHub Actions:
 
-All commands are run from the root of the project, from a terminal:
+- **Every pull request** builds the site, so a broken build shows up before merging.
+- **Every push to `main`**, including merged PRs, builds and deploys to the `athlethium-website` Worker (see `wrangler.jsonc`).
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run deploy`          | Deploy your production site to Cloudflare        |
+The deploy needs two repository secrets:
 
-## 👀 Want to learn more?
+- `CLOUDFLARE_API_TOKEN`: a token made from the **Edit Cloudflare Workers** template
+- `CLOUDFLARE_ACCOUNT_ID`
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+To redeploy without a code change, run the workflow from the Actions tab or with `gh workflow run deploy.yml`.
 
-## Credit
+## Related repositories
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+- [fitness-app](https://github.com/harrycodd/fitness-app): the Expo / React Native app
+- [fitness-app-backend](https://github.com/harrycodd/fitness-app-backend): Firebase Cloud Functions that generate the training plans
