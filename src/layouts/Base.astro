@@ -10,9 +10,11 @@ interface Props {
   lang?: Lang;
   /** On the English home page: send first-time visitors to their browser's language. */
   detectLanguage?: boolean;
+  /** This page in each language, for the language switcher. Defaults to the home pages. */
+  alternates?: Record<Lang, string>;
 }
 
-const { title, description, lang = defaultLang, detectLanguage = false } = Astro.props;
+const { title, description, lang = defaultLang, detectLanguage = false, alternates } = Astro.props;
 const t = ui[lang];
 const homes = Object.fromEntries(langs.map((code) => [code, homePath(code)]));
 ---
@@ -76,7 +78,7 @@ const homes = Object.fromEntries(langs.map((code) => [code, homePath(code)]));
   </head>
   <body>
     <a class="skip-link" href="#main">{t.a11y.skip}</a>
-    <Header lang={lang} />
+    <Header lang={lang} alternates={alternates} />
     <main id="main">
       <slot />
     </main>

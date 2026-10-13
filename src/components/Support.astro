@@ -1,0 +1,213 @@
+---
+import Base from '../layouts/Base.astro';
+import { langs, type Lang } from '../i18n/ui';
+import { support, supportEmail, supportPath } from '../i18n/support';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = support[lang];
+const alternates = Object.fromEntries(langs.map((code) => [code, supportPath(code)])) as Record<Lang, string>;
+---
+
+<Base lang={lang} title={t.meta.title} description={t.meta.description} alternates={alternates}>
+  <section class="support container">
+    <header class="head">
+      <p class="kicker">{t.kicker}</p>
+      <h1>{t.title}</h1>
+      <p class="intro">{t.intro}</p>
+    </header>
+
+    <div class="grid">
+      <aside class="contact" id="contact">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="3"></rect>
+            <path d="m3 7 9 6 9-6"></path>
+          </svg>
+        </span>
+        <h2>{t.contact.title}</h2>
+        <p>{t.contact.body}</p>
+        <a class="btn btn-primary" href={`mailto:${supportEmail}`}>{t.contact.button}</a>
+        <a class="address" href={`mailto:${supportEmail}`}>{supportEmail}</a>
+      </aside>
+
+      <div class="faq">
+        <h2>{t.faqTitle}</h2>
+        {
+          t.faqs.map((item, i) => (
+            <details open={i === 0}>
+              <summary>
+                <span>{item.q}</span>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 6l4 4 4-4" />
+                </svg>
+              </summary>
+              <p>{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .support {
+    padding-top: 56px;
+    padding-bottom: 40px;
+  }
+
+  .head {
+    max-width: 640px;
+    display: grid;
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+
+  .kicker {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+  }
+
+  .intro {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .contact {
+    position: sticky;
+    top: 96px;
+    display: grid;
+    gap: 14px;
+    justify-items: start;
+    padding: 28px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background:
+      radial-gradient(ellipse 80% 70% at 0% 0%, var(--accent-soft), transparent 70%),
+      var(--bg-raised);
+  }
+
+  .icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact h2 {
+    font-size: 21px;
+    margin-top: 4px;
+  }
+
+  .contact p {
+    color: var(--text-muted);
+    font-size: 15px;
+  }
+
+  .contact .btn {
+    margin-top: 6px;
+  }
+
+  .address {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+    word-break: break-all;
+  }
+
+  .address:hover {
+    color: var(--text);
+  }
+
+  .faq h2 {
+    font-size: 21px;
+    margin-bottom: 12px;
+  }
+
+  details {
+    border-bottom: 1px solid var(--border);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 4px;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--text-subtle);
+    transition: transform 0.2s ease;
+  }
+
+  details[open] summary svg {
+    transform: rotate(180deg);
+  }
+
+  summary:hover span {
+    color: var(--accent);
+  }
+
+  details p {
+    padding: 0 40px 22px 4px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 880px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact {
+      position: static;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .support {
+      padding-top: 32px;
+    }
+
+    details p {
+      padding-right: 4px;
+    }
+  }
+</style>
