@@ -1,4 +1,13 @@
 ---
+import { homePath, ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const home = homePath(lang);
 const year = new Date().getFullYear();
 ---
 
@@ -6,48 +15,48 @@ const year = new Date().getFullYear();
   <div class="container inner">
     <div class="top">
       <div class="about">
-        <a href="/" class="brand" aria-label="Athlethium home">
+        <a href={home} class="brand" aria-label={t.a11y.home}>
           <span class="logo-mark" aria-hidden="true"></span>
           <span class="brand-name">Athlethium</span>
         </a>
-        <p>Adaptive coaching for cyclists, runners and triathletes.</p>
+        <p>{t.footer.tagline}</p>
       </div>
 
-      <nav class="links" aria-label="Footer">
+      <nav class="links" aria-label={t.a11y.footerNav}>
         <div>
-          <h3>Product</h3>
-          <a href="/#features">Features</a>
-          <a href="/#how-it-works">How it works</a>
-          <a href="/#download">Download</a>
+          <h3>{t.footer.product}</h3>
+          <a href={`${home}#features`}>{t.nav.features}</a>
+          <a href={`${home}#how-it-works`}>{t.nav.how}</a>
+          <a href={`${home}#download`}>{t.footer.download}</a>
         </div>
         <div>
-          <h3>Legal</h3>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms &amp; Conditions</a>
+          <h3>{t.footer.legal}</h3>
+          <a href="/privacy" hreflang="en">{t.footer.privacy} {t.footer.inEnglish && <span class="note">{t.footer.inEnglish}</span>}</a>
+          <a href="/terms" hreflang="en">{t.footer.terms} {t.footer.inEnglish && <span class="note">{t.footer.inEnglish}</span>}</a>
         </div>
         <div>
-          <h3>Contact</h3>
+          <h3>{t.footer.contact}</h3>
           <a href="mailto:support@athlethium.com">support@athlethium.com</a>
         </div>
       </nav>
     </div>
 
     <div class="bottom">
-      <p>&copy; {year} Athlethium. All rights reserved.</p>
+      <p>&copy; {year} Athlethium. {t.footer.rights}</p>
       <div class="social">
-        <a href="https://x.com/athlethium" aria-label="Athlethium on X" target="_blank" rel="noopener noreferrer">
+        <a href="https://x.com/athlethium" aria-label={t.a11y.onX} target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
           </svg>
         </a>
-        <a href="https://instagram.com/athlethium" aria-label="Athlethium on Instagram" target="_blank" rel="noopener noreferrer">
+        <a href="https://instagram.com/athlethium" aria-label={t.a11y.onInstagram} target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="2" y="2" width="20" height="20" rx="5"></rect>
             <circle cx="12" cy="12" r="4.2"></circle>
             <circle cx="17.6" cy="6.4" r="0.6" fill="currentColor"></circle>
           </svg>
         </a>
-        <a href="mailto:support@athlethium.com" aria-label="Email Athlethium">
+        <a href="mailto:support@athlethium.com" aria-label={t.a11y.email}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="2" y="4" width="20" height="16" rx="3"></rect>
             <path d="m3 7 9 6 9-6"></path>
@@ -122,6 +131,11 @@ const year = new Date().getFullYear();
 
   .links a:hover {
     color: var(--text);
+  }
+
+  .note {
+    color: var(--text-subtle);
+    font-size: 12px;
   }
 
   .bottom {
